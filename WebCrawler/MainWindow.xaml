@@ -1,0 +1,123 @@
+﻿<Window x:Class="WebCrawler.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebCrawler"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Web Crawler" Height="500" Width="1200">
+    <Border Padding="10">
+        <StackPanel>
+
+            <!-- Controls -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="baseURL" Margin="10 5 5 5"  Grid.Column="0" Text="http://crawlertest.cs.tu-varna.bg" IsReadOnly="True" />
+                <TextBox x:Name="searchKeyword" Margin="10 5 5 5" Grid.Column="2" Text="Classes are held" MaxLength="40"/>
+                <Button Margin="0 5 5 5" Grid.Column="1" Content="Start" Click="startCrawling" />
+                <Button Margin="0 5 5 5" Grid.Column="3" Content="Search for sequence" Click="searchForSequence"/>
+                <Button Margin="0 5 10 5" Grid.Column="4" Content="Search for occurence" Click="searchForOccurence"/>
+            </Grid>
+
+            <!-- TreeView and DataGrid -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TreeView x:Name="treeView" Grid.Column="0" Margin="10 5 5 0" Height="250" />
+
+                <DataGrid x:Name="dataGrid" IsReadOnly="True" AutoGenerateColumns="False" Grid.Column="1"  Margin="10,5,10,0"  Height="250">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Keyword" Width="*" Binding="{Binding keyword}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Document URL" Width="2*" Binding="{Binding docURL}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Position" Width="*" Binding="{Binding position}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!-- Counters -->
+            <Grid Margin="10 10 10 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="crawlerTime" TextAlignment="Center" IsReadOnly="True" Grid.Column="0" Margin="0 0 5 0" />
+                <TextBox x:Name="scannerTime" TextAlignment="Center" IsReadOnly="True" Grid.Column="1" Margin="10 0 0 0" />
+            </Grid>
+
+            <!-- Details -->
+            <Grid Margin="10 0 10 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="0 0 5 0"  Background="LightGray" Height="110">
+                    
+                    <!-- Tree type -->
+                    <Grid Margin="20 20 20 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Tree Type" TextAlignment="Center" />
+                        <TextBox x:Name="treeType" Grid.Column="1" TextAlignment="Center" IsReadOnly="True" />
+                    </Grid>
+                    
+                    <!-- Number of nodes -->
+                    <Grid Margin="20 5 20 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Number of nodes" TextAlignment="Center" />
+                        <TextBox x:Name="numberOfNodes" Grid.Column="1" TextAlignment="Center" IsReadOnly="True" />
+                    </Grid>
+                    
+                    <!-- Tree height -->
+                    <Grid Margin="20 5 20 20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Tree height" TextAlignment="Center" />
+                        <TextBox x:Name="treeHeight" Grid.Column="1" TextAlignment="Center" IsReadOnly="True"  />
+                    </Grid>
+                </StackPanel>
+                
+                <!-- Error Log -->
+                <RichTextBox x:Name="ErrorLog" IsReadOnly="True" Grid.Column="1" Margin="10 0 0 0" Height="110" Foreground="PaleVioletRed" />
+            </Grid>
+
+        </StackPanel>
+    </Border>
+</Window>
